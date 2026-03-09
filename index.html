@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stag Task Game</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #111;
+    color: white;
+    padding: 30px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+#task {
+    font-size: 28px;
+    margin: 40px 0;
+    min-height: 120px;
+}
+
+button {
+    font-size: 22px;
+    padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+#reveal {
+    background-color: #28a745;
+    color: white;
+}
+
+#pass {
+    background-color: #dc3545;
+    color: white;
+}
+
+#passes {
+    margin-top: 20px;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Stag Task</h1>
+
+<div id="task">Press Reveal to get the next task</div>
+
+<button id="reveal">Reveal Task</button>
+<button id="pass">Use Pass</button>
+
+<div id="passes">Passes Remaining: 10</div>
+
+<script>
+
+let tasks = [
+"Take your socks off until your drink is finished",
+"Go and ask a stranger for permission to drink your drink",
+"20 Press ups",
+"Stand up and shout Avengers Assemble",
+"Go and tell one of the bar staff you asked for a beer. When they point out you have a beer say 'I know', give them a thumbs up and walk away",
+"Loudly say 'Daddy Likey' every time you have a drink",
+"Refer to yourself only in the third person until your drink is finished",
+"Ask a stranger to rate your outfit from 1-10",
+"Arm wrestle someone, literally anyone who agrees to",
+"Ask a group of strangers if they're team Edward or team Jacob",
+"See how many beermats you can balance on your nose",
+"At some point during your drink burst into your favourite Disney song"
+];
+
+let passes = 10;
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+shuffle(tasks);
+
+document.getElementById("reveal").onclick = function() {
+
+    if (tasks.length === 0) {
+        document.getElementById("task").innerText = "All tasks completed!";
+        return;
+    }
+
+    let nextTask = tasks.shift();
+    document.getElementById("task").innerText = nextTask;
+};
+
+document.getElementById("pass").onclick = function() {
+
+    if (passes > 0) {
+        passes--;
+        document.getElementById("passes").innerText = "Passes Remaining: " + passes;
+    } else {
+        alert("No passes left!");
+    }
+
+};
+
+</script>
+
+</body>
+</html>
